@@ -11,13 +11,12 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const findOrCreate = require(`mongoose-findorcreate`);
 const FacebookStrategy = require("passport-facebook").Strategy;
 
+
 const app = express();
 
 app.set('view engine', 'ejs');
 
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(express.static("public"));
 
@@ -72,10 +71,8 @@ passport.use(new GoogleStrategy({
     userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
   },
   function(accessToken, refreshToken, profile, cb) {
-    // console.log(profile);
-    User.findOrCreate({
-      googleId: profile.id
-    }, function(err, user) {
+    console.log(profile);
+    User.findOrCreate({ googleId: profile.id }, function (err, user) {
       return cb(err, user);
     });
   }
@@ -87,150 +84,109 @@ passport.use(new FacebookStrategy({
     callbackURL: "http://localhost:3000/auth/facebook/secrets"
   },
   function(accessToken, refreshToken, profile, cb) {
-    User.findOrCreate({
-      facebookId: profile.id
-    }, function(err, user) {
+    User.findOrCreate({ facebookId: profile.id }, function (err, user) {
       return cb(err, user);
     });
   }
 ));
+
 
 app.get("/", function(req, res) {
   res.render("home")
 });
 
 app.get("/auth/google",
-  passport.authenticate('google', {
-    scope: ["profile"]
-  })
+  passport.authenticate('google', { scope: ["profile"] })
 );
 
 app.get("/auth/google/secrets",
-  passport.authenticate('google', {
-    failureRedirect: "/login"
-  }),
+  passport.authenticate('google', { failureRedirect: "/login" }),
   function(req, res) {
     // Successful authentication, redirect home.
     res.redirect('/secrets');
   });
 
 app.get('/auth/facebook',
-  passport.authenticate('facebook'));
+    passport.authenticate('facebook'));
 
 app.get('/auth/facebook/secrets',
-  passport.authenticate('facebook', {
-    failureRedirect: '/login'
-  }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('/secrets');
-  });
+    passport.authenticate('facebook', { failureRedirect: '/login' }),
+    function(req, res) {
+      // Successful authentication, redirect home.
+      res.redirect('/secrets');
+    });
 
-
-//////////////////////////////////////////////////////////////////
-
-app.get("/login", function(req, res) {
+app.get("/login", function(req, res){
   res.render("login")
 });
 
-app.get("/register", function(req, res) {
+app.get("/register", function(req, res){
   res.render("register")
 });
 
-app.get("/secrets", function(req, res) {
-  User.find({secret: {$nin: [null, []] } }, function(err, secrets) {
-    if (err) {
+app.get("/secrets", function(req, res){
+  User.find({"secret":{$ne: null}}, function(err, foundUser){
+    if (err){
       console.log(err);
     } else {
-      if (req.isAuthenticated()) {
-        User.findById(req.user.id, function(err, foundUser) {
-          if (err) {
-            console.log(err);
-          } else {
-            res.render("secrets", {
-              secrets: secrets,
-              text: "To access/submit your secrets go to My Secrets"
-            });
-          }
-        });
-      } else {
-        res.render("secrets", {
-          secrets: secrets,
-          text: "Please login/register to submit your own secrets!"
-        });
-    }};
+      if (foundUser) {
+      res.render("secrets", {usersWithSecrets: foundUser});
+    }
+   }
   });
 });
 
-app.route("/submit")
-  .get(function(req, res) {
-    if (req.isAuthenticated()) {
-      User.findById(req.user.id, function(err, foundUser) {
-        if (!err) {
-          res.render("submit", {
-            userSecrets: foundUser.secret
-          });
-        }
-      })
-    } else {
-      res.render("submit", {
-        userSecrets: []
-      });
-    }
-  })
-  .post(function(req, res) {
-    if (req.isAuthenticated()) {
-      User.findById(req.user.id, function(err, user) {
-        user.secret.push(req.body.secret);
-        user.save(function() {
-          res.redirect("/secrets");
-        });
-      });
-
-    } else {
-      res.redirect("/login");
-    }
-  });
-
-app.post("/submit/delete", function(req, res) {
+app.get("/submit", function(req, res){
   if (req.isAuthenticated()) {
-    User.findById(req.user.id, function(err, foundUser) {
-      foundUser.secret.splice(foundUser.secret.indexOf(req.body.secret), 1);
-      foundUser.save(function(err) {
-        if (!err) {
-          res.redirect("/secrets");
-        }
-      });
-    });
+    res.render("submit");
   } else {
     res.redirect("/login");
   }
 });
 
-app.get("/logout", function(req, res) {
-  req.logout();
-  res.redirect("/");
+app.get("/logout", function(req, res){
+   req.logout();
+   res.redirect("/");
 })
 
 app.post("/register", function(req, res) {
-  User.register({
-    username: req.body.username
-  }, req.body.password, function(err, user) {
+  User.register({username: req.body.username}, req.body.password, function(err, user){
     if (err) {
       console.log(err);
       res.redirect("/register")
     } else {
-      passport.authenticate("local")(req, res, function() {
+      passport.authenticate("local")(req, res, function(){
         res.redirect("/secrets")
       })
     }
   })
 });
 
-app.post('/login', passport.authenticate('local', {
-  successRedirect:'/secrets',
-  failureRedirect: '/login',  
-}));
+app.post("/submit", async (req, res) => {
+    try {
+        await User.findOneAndUpdate({_id: req.user.id}, {$push: { secret:     req.body.secret }});
+        res.redirect("/secrets");
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+app.post("/login", function(req, res) {
+  const user = new User({
+    username: req.body.username,
+    password: req.body.passport
+  });
+
+  req.login(user, function(err){
+    if (err) {
+      console.log(err);
+    } else {
+      passport.authenticate("local")(req,res, function(){
+        res.redirect("/secrets");
+      })
+    }
+  })
+});
 
 app.listen(3000, function() {
   console.log("Server started succesfully");
