@@ -229,9 +229,9 @@ app.post("/register", function(req, res) {
 
 app.post('/login', passport.authenticate('local', {
   successRedirect:'/secrets',
-  failureRedirect: '/login',  
+  failureRedirect: '/login',
 }));
 
-app.listen(3000, function() {
-  console.log("Server started succesfully");
-});
+let port = process.env.PORT;
+if (port == null || port == "") { port = 3000;}
+app.listen(port);
