@@ -43,7 +43,8 @@ const userSchema = new mongoose.Schema({
   password: String,
   googleId: String,
   facebookId: String,
-  secret: Array
+  secret: Array,
+  username: String
 });
 
 //adding plugins to schema//
