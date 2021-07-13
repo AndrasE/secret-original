@@ -105,7 +105,7 @@ app.get("/auth/google",
   })
 );
 
-app.get("/auth/google/secrets",
+app.get("peo/auth/google/secrets",
   passport.authenticate('google', {
     failureRedirect: "/login"
   }),
@@ -114,10 +114,10 @@ app.get("/auth/google/secrets",
     res.redirect('/secrets');
   });
 
-app.get('/auth/facebook',
+app.get('people/auth/facebook',
   passport.authenticate('facebook'));
 
-app.get('/auth/facebook/secrets',
+app.get('people/auth/facebook/secrets',
   passport.authenticate('facebook', {
     failureRedirect: '/login'
   }),
