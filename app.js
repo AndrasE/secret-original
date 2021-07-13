@@ -74,8 +74,7 @@ passport.use(new GoogleStrategy({
   function(accessToken, refreshToken, profile, cb) {
     // console.log(profile);
     User.findOrCreate({
-      googleId: profile.id,
-      email: "googleIdUser"
+      googleId: profile.id
     }, function(err, user) {
       return cb(err, user);
     });
@@ -215,7 +214,7 @@ app.get("/logout", function(req, res) {
 
 app.post("/register", function(req, res) {
   User.register({
-    username: req.body.username
+    username: req.body.username +"idk"
   }, req.body.password, function(err, user) {
     if (err) {
       console.log(err);
