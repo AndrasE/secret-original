@@ -214,7 +214,7 @@ app.get("/logout", function(req, res) {
 
 app.post("/register", function(req, res) {
   User.register({
-    username: req.body.username +"idk"
+    username: req.body.username
   }, req.body.password, function(err, user) {
     if (err) {
       console.log(err);
