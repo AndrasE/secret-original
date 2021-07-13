@@ -43,8 +43,7 @@ const userSchema = new mongoose.Schema({
   password: String,
   googleId: String,
   facebookId: String,
-  secret: Array,
-  username: String
+  secret: Array
 });
 
 //adding plugins to schema//
@@ -75,8 +74,7 @@ passport.use(new GoogleStrategy({
   function(accessToken, refreshToken, profile, cb) {
     // console.log(profile);
     User.findOrCreate({
-      googleId: profile.id,
-      username: profile.emails[0].value
+      googleId: profile.id
     }, function(err, user) {
       return cb(err, user);
     });
