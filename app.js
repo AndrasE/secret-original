@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-app.use(express.static("public"));
+app.use(express.static(__dirname + '/public'));
 
 //use session packadge with some setup config//
 app.use(session({
