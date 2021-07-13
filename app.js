@@ -84,7 +84,7 @@ passport.use(new GoogleStrategy({
 passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
-    callbackURL: "https://app-secret.herokuapp.com/people/auth/facebook"
+    callbackURL: "https://app-secret.herokuapp.com/auth/facebook"
   },
   function(accessToken, refreshToken, profile, cb) {
     User.findOrCreate({
@@ -114,10 +114,10 @@ app.get("/auth/google/secrets",
     res.redirect('/secrets');
   });
 
-app.get('/people/auth/facebook',
+app.get('/auth/facebook',
   passport.authenticate('facebook'));
 
-app.get('/people/auth/facebook/secrets',
+app.get('/auth/facebook/secrets',
   passport.authenticate('facebook', {
     failureRedirect: '/login'
   }),
