@@ -14,6 +14,7 @@ const FacebookStrategy = require("passport-facebook").Strategy;
 const app = express();
 
 const randomNumber = Math.floor(1000 + Math.random() * 9000);
+const randomNumberString = randomNumber.toString();
 
 app.set('view engine', 'ejs');
 
@@ -76,7 +77,7 @@ passport.use(new GoogleStrategy({
   function(accessToken, refreshToken, profile, cb) {
     User.findOrCreate({
       googleId: profile.id,
-      username: "googleLogin" + randomnumber
+      username: "googleLogin" + randomNumberString
     }, function(err, user) {
       return cb(err, user);
     });
@@ -91,7 +92,7 @@ passport.use(new FacebookStrategy({
   function(accessToken, refreshToken, profile, cb) {
     User.findOrCreate({
       facebookId: profile.id,
-      uusername: "facebooklogin" + randomnumber
+      uusername: "facebooklogin" + randomNumberString
     }, function(err, user) {
       return cb(err, user);
     });
@@ -211,6 +212,7 @@ app.post("/submit/delete", function(req, res) {
 });
 
 app.get("/logout", function(req, res) {
+  console.log(randomNumber);
   req.logout();
   res.redirect("/");
 })
