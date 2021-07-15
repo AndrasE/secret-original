@@ -92,7 +92,7 @@ passport.use(new FacebookStrategy({
   function(accessToken, refreshToken, profile, cb) {
     User.findOrCreate({
       facebookId: profile.id,
-      uusername: "facebooklogin" + randomNumberString
+      username: "facebooklogin" + randomNumberString
     }, function(err, user) {
       return cb(err, user);
     });
