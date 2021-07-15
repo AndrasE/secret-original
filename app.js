@@ -13,6 +13,8 @@ const FacebookStrategy = require("passport-facebook").Strategy;
 
 const app = express();
 
+const randomNumber = Math.floor(1000 + Math.random() * 9000);
+
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({
@@ -74,7 +76,7 @@ passport.use(new GoogleStrategy({
   function(accessToken, refreshToken, profile, cb) {
     User.findOrCreate({
       googleId: profile.id,
-      username: "asd"
+      username: "googleLogin" + randomnumber
     }, function(err, user) {
       return cb(err, user);
     });
@@ -89,7 +91,7 @@ passport.use(new FacebookStrategy({
   function(accessToken, refreshToken, profile, cb) {
     User.findOrCreate({
       facebookId: profile.id,
-      username: "asd"
+      uusername: "facebooklogin" + randomnumber
     }, function(err, user) {
       return cb(err, user);
     });
