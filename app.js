@@ -75,7 +75,7 @@ passport.use(new GoogleStrategy({
     // console.log(profile);
     User.findOrCreate({
       googleId: profile.id,
-      username: "asd"
+      username: profile.email
     }, function(err, user) {
       return cb(err, user);
     });
