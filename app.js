@@ -76,7 +76,6 @@ passport.use(new GoogleStrategy({
   },
   function(accessToken, refreshToken, profile, cb) {
     User.findOrCreate({
-      username: "",
       googleId: profile.id
     }, function(err, user) {
       return cb(err, user);
@@ -91,7 +90,6 @@ passport.use(new FacebookStrategy({
   },
   function(accessToken, refreshToken, profile, cb) {
     User.findOrCreate({
-      username: "",
       facebookId: profile.id
     }, function(err, user) {
       return cb(err, user);
@@ -219,7 +217,7 @@ app.get("/logout", function(req, res) {
 
 app.post("/register", function(req, res) {
   User.register({
-    username: req.body.username
+    email: req.body.username
   }, req.body.password, function(err, user) {
     if (err) {
       console.log(err);
