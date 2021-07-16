@@ -42,7 +42,7 @@ mongoose.connect("mongodb+srv://andras:Eaeaea123@cluster0.zfr0d.mongodb.net/user
 
 //schema in order to have a plugin it has to be a mongoose schema//
 const userSchema = new mongoose.Schema({
-  email: String,
+  usermame: String,
   password: String,
   googleId: String,
   facebookId: String,
@@ -76,6 +76,7 @@ passport.use(new GoogleStrategy({
   },
   function(accessToken, refreshToken, profile, cb) {
     User.findOrCreate({
+      username: "",
       googleId: profile.id
     }, function(err, user) {
       return cb(err, user);
@@ -90,6 +91,7 @@ passport.use(new FacebookStrategy({
   },
   function(accessToken, refreshToken, profile, cb) {
     User.findOrCreate({
+      username: "",
       facebookId: profile.id
     }, function(err, user) {
       return cb(err, user);
@@ -217,7 +219,7 @@ app.get("/logout", function(req, res) {
 
 app.post("/register", function(req, res) {
   User.register({
-    email: req.body.username
+    username: req.body.username
   }, req.body.password, function(err, user) {
     if (err) {
       console.log(err);
