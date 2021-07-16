@@ -76,10 +76,8 @@ passport.use(new GoogleStrategy({
   },
   function(accessToken, refreshToken, profile, cb) {
     User.findOrCreate({
+      username: "googleLogin" + randomNumberString,
       googleId: profile.id
-      facebookId: "",
-      username: "",
-      password: ""
     }, function(err, user) {
       return cb(err, user);
     });
@@ -93,15 +91,28 @@ passport.use(new FacebookStrategy({
   },
   function(accessToken, refreshToken, profile, cb) {
     User.findOrCreate({
-      facebookId: profile.id,
-      username: "",
-      password: "",
-      googleId: ""
+      username: "facebooklogin" + randomNumberString,
+      facebookId: profile.id
     }, function(err, user) {
       return cb(err, user);
     });
   }
 ));
+
+app.post("/register", function(req, res) {
+  User.register({
+    username: req.body.username
+  }, req.body.password, function(err, user) {
+    if (err) {
+      console.log(err);
+      res.redirect("/register")
+    } else {
+      passport.authenticate("local")(req, res, function() {
+        res.redirect("/secrets")
+      })
+    }
+  })
+});
 
 app.get("/", function(req, res) {
   res.render("home")
@@ -132,23 +143,6 @@ app.get('/auth/facebook/secrets',
   function(req, res) {
     // Successful authentication, redirect home.
     res.redirect('/secrets');
-  });
-
-  app.post("/register", function(req, res) {
-    User.register({
-      username: req.body.username,
-      googleId: "",
-      facebookId: ""
-    }, req.body.password, function(err, user) {
-      if (err) {
-        console.log(err);
-        res.redirect("/register")
-      } else {
-        passport.authenticate("local")(req, res, function() {
-          res.redirect("/secrets")
-        })
-      }
-    })
   });
 
 
@@ -237,6 +231,7 @@ app.get("/logout", function(req, res) {
   req.logout();
   res.redirect("/");
 })
+
 
 
 app.post('/login', passport.authenticate('local', {
