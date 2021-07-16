@@ -77,9 +77,9 @@ passport.use(new GoogleStrategy({
   function(accessToken, refreshToken, profile, cb) {
     User.findOrCreate({
       googleId: profile.id
-      facebookId: null,
-      username: null,
-      password: null
+      facebookId: "",
+      username: "",
+      password: ""
     }, function(err, user) {
       return cb(err, user);
     });
@@ -94,9 +94,9 @@ passport.use(new FacebookStrategy({
   function(accessToken, refreshToken, profile, cb) {
     User.findOrCreate({
       facebookId: profile.id,
-      username: null,
-      password: null,
-      googleId: null,
+      username: "",
+      password: "",
+      googleId: ""
     }, function(err, user) {
       return cb(err, user);
     });
@@ -137,8 +137,8 @@ app.get('/auth/facebook/secrets',
   app.post("/register", function(req, res) {
     User.register({
       username: req.body.username,
-      googleId: null,
-      facebookId: null
+      googleId: "",
+      facebookId: ""
     }, req.body.password, function(err, user) {
       if (err) {
         console.log(err);
