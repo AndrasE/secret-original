@@ -76,7 +76,7 @@ passport.use(new GoogleStrategy({
   },
   function(accessToken, refreshToken, profile, cb) {
     User.findOrCreate({
-      username: "googleLogin" + randomNumberString,
+      username: "",
       googleId: profile.id
     }, function(err, user) {
       return cb(err, user);
@@ -91,7 +91,7 @@ passport.use(new FacebookStrategy({
   },
   function(accessToken, refreshToken, profile, cb) {
     User.findOrCreate({
-      username: "facebooklogin" + randomNumberString,
+      username: "",
       facebookId: profile.id
     }, function(err, user) {
       return cb(err, user);
