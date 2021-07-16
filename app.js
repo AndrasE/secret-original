@@ -77,7 +77,9 @@ passport.use(new GoogleStrategy({
   function(accessToken, refreshToken, profile, cb) {
     User.findOrCreate({
       username: "googleLogin" + randomNumberString,
-      googleId: profile.id
+      password: "idk" + randomNumberString,
+      googleId: profile.id,
+      facebookId: "none" +randomNumberString
     }, function(err, user) {
       return cb(err, user);
     });
@@ -92,6 +94,8 @@ passport.use(new FacebookStrategy({
   function(accessToken, refreshToken, profile, cb) {
     User.findOrCreate({
       username: "facebooklogin" + randomNumberString,
+      password: "idk23" + randomNumberString,
+      googleId: "none" + randomNumberString,
       facebookId: profile.id
     }, function(err, user) {
       return cb(err, user);
@@ -219,7 +223,9 @@ app.get("/logout", function(req, res) {
 
 app.post("/register", function(req, res) {
   User.register({
-    username: req.body.username
+    username: req.body.username,
+    googleId: "nemvan" + randomNumberString,
+    facebookId: "ittsem" + randomNumberString,
   }, req.body.password, function(err, user) {
     if (err) {
       console.log(err);
