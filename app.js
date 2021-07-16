@@ -76,10 +76,10 @@ passport.use(new GoogleStrategy({
   },
   function(accessToken, refreshToken, profile, cb) {
     User.findOrCreate({
-      username: "googleLogin" + randomNumberString,
-      password: "idk" + randomNumberString,
-      googleId: profile.id,
-      facebookId: "none" +randomNumberString
+      googleId: profile.id
+      facebookId: null,
+      username: null,
+      password: null
     }, function(err, user) {
       return cb(err, user);
     });
@@ -93,10 +93,10 @@ passport.use(new FacebookStrategy({
   },
   function(accessToken, refreshToken, profile, cb) {
     User.findOrCreate({
-      username: "facebooklogin" + randomNumberString,
-      password: "idk23" + randomNumberString,
-      googleId: "none" + randomNumberString,
-      facebookId: profile.id
+      facebookId: profile.id,
+      username: null,
+      password: null,
+      googleId: null,
     }, function(err, user) {
       return cb(err, user);
     });
@@ -132,6 +132,23 @@ app.get('/auth/facebook/secrets',
   function(req, res) {
     // Successful authentication, redirect home.
     res.redirect('/secrets');
+  });
+
+  app.post("/register", function(req, res) {
+    User.register({
+      username: req.body.username,
+      googleId: null,
+      facebookId: null
+    }, req.body.password, function(err, user) {
+      if (err) {
+        console.log(err);
+        res.redirect("/register")
+      } else {
+        passport.authenticate("local")(req, res, function() {
+          res.redirect("/secrets")
+        })
+      }
+    })
   });
 
 
@@ -221,22 +238,6 @@ app.get("/logout", function(req, res) {
   res.redirect("/");
 })
 
-app.post("/register", function(req, res) {
-  User.register({
-    username: req.body.username,
-    googleId: "nemvan" + randomNumberString,
-    facebookId: "ittsem" + randomNumberString,
-  }, req.body.password, function(err, user) {
-    if (err) {
-      console.log(err);
-      res.redirect("/register")
-    } else {
-      passport.authenticate("local")(req, res, function() {
-        res.redirect("/secrets")
-      })
-    }
-  })
-});
 
 app.post('/login', passport.authenticate('local', {
   successRedirect:'/secrets',
