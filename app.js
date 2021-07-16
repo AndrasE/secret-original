@@ -220,7 +220,10 @@ app.get("/logout", function(req, res) {
 
 app.post("/register", function(req, res) {
   User.register({
-    username: req.body.username
+    username: req.body.username,
+    googleId: "asd1" + randomNumberString,
+    facebookId: "asd" + randomNumberString
+
   }, req.body.password, function(err, user) {
     if (err) {
       console.log(err);
