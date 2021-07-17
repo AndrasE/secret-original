@@ -1,6 +1,8 @@
 //on the top of everything.
 require(`dotenv`).config();
 const express = require("express");
+const favicon = require('serve-favicon')
+const path = require('path')
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const mongoose = require("mongoose");
@@ -13,8 +15,8 @@ const FacebookStrategy = require("passport-facebook").Strategy;
 
 const app = express();
 
-const randomNumber = Math.floor(1000 + Math.random() * 9000);
-const randomNumberString = randomNumber.toString();
+// const randomNumber = Math.floor(1000 + Math.random() * 9000);
+// const randomNumberString = randomNumber.toString();
 
 app.set('view engine', 'ejs');
 
@@ -23,7 +25,9 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use(express.static(__dirname + '/public'));
-app.use('favicon.ico', express.static('favicon.ico'));
+const app = express()
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
+
 
 //use session packadge with some setup config//
 app.use(session({
