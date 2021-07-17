@@ -34,11 +34,7 @@ body {
   font-size: 2.1rem;
 }
 
-a.textLink {
-    color: #292b2c;
-    text-decoration: underline;
-}
-
+/* google/facebook buttons */
 a.btn-social {
   color: #292b2c;
   background-color: transparent;
@@ -46,6 +42,13 @@ a.btn-social {
 }
 
 a.btn-social:hover {
-  background-color: #292b2c;
+  background-color: #3E4041;
+}
 
+a.btn-social:visited {
+  background-color: transparent;
+}
+
+a.btn-social:active:hover {
+  background-color: #292b2c;
 }
