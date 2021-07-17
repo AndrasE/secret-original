@@ -49,6 +49,10 @@ a.btn-social:visited {
   background-color: transparent;
 }
 
+a.btn-social:focus {
+  background-color: transparent;
+}
+
 a.btn-social:active:hover {
   background-color: #292b2c;
 }
