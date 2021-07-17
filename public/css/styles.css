@@ -50,7 +50,9 @@ a.btn-social:visited {
 }
 
 a.btn-social:focus {
+  color: #292b2c;
   background-color: transparent;
+  text-decoration: underline;
 }
 
 a.btn-social:active:hover {
