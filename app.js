@@ -23,6 +23,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use(express.static(__dirname + '/public'));
+app.use('/favicon.ico', express.static('favicon.ico'));
 
 //use session packadge with some setup config//
 app.use(session({
