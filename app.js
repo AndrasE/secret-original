@@ -39,7 +39,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect("mongodb+srv://andras:Eaeaea123@cluster0.zfr0d.mongodb.net/userDB", {
+mongoose.connect("mongodb+srv://andras:" +process.env.MONGOOSE_PASS+ "@cluster0.zfr0d.mongodb.net/userDB", {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
@@ -75,7 +75,7 @@ passport.deserializeUser(function(id, done) {
 passport.use(new GoogleStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: "https://app-secret.herokuapp.com/auth/google/secrets",
+    callbackURL: "https://app-secret-original.herokuapp.com/auth/google/secrets",
     userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
   },
   function(accessToken, refreshToken, profile, cb) {
@@ -91,7 +91,7 @@ passport.use(new GoogleStrategy({
 passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
-    callbackURL: "https://app-secret.herokuapp.com/auth/facebook/secrets"
+    callbackURL: "https://app-secret-original.herokuapp.com/auth/facebook/secrets"
   },
   function(accessToken, refreshToken, profile, cb) {
     User.findOrCreate({
@@ -231,7 +231,6 @@ app.post("/submit/delete", function(req, res) {
 });
 
 app.get("/logout", function(req, res) {
-  console.log(randomNumber);
   req.logout();
   res.redirect("/");
 })
