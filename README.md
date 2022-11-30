@@ -16,9 +16,11 @@
 
 ## Hi there 👋
 
-While I was doing my self-studies on Udemy I felt intrigued to take a project further as by using EJS with MongoDb user could interact with the App. This was the first finished app for the idea. As I wanted to add extra bits, I later recreated the repo and redisinged it. Simple application, but a useful base! 
+While I was doing my self-studies on Udemy I felt intrigued to take a project further as by using EJS with MongoDb user could interact with the App. 
+This was the first finished product. As I wanted to add extra bits, I later recreated the repo on the name secrets and redesigned it. This one is maybe a s
+imple application, but also a very useful base! 
 
-I hope you find it useful for your own project!
+I hope you can find it useful too!
 
 Thank you, code safe! 💻
 
