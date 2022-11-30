@@ -24,7 +24,7 @@ I hope you can find it useful too!
 
 Thank you, code safe! 💻
 
-ps.: If you want to see the deployment it`s hosted on heroku eco-tier the server,it might take 2-3s to spin up, please be patient. 🐨
+ps.: If you want to see the deployment its hosted on heroku eco-tier the server, it might take 2-3s to spin up, please be patient. 🐨
 
 
 ## Run 🚀
