@@ -16,7 +16,7 @@
 
 ## Hi there 👋
 
-While I was doing my self-studies on Udemy I felt intrigued to take a project further as by using EJS with MongoDb user could interact with the App. 
+While I was doing my self-studies on <a href="https://www.udemy.com/course/the-complete-web-development-bootcamp" target="_blank" rel="noopener noreferrer">Udemy</a> I felt intrigued to take a project further as by using EJS with MongoDb user could interact with the App. 
 This was the first finished product. As I wanted to add extra bits, I later recreated the repo on the name secrets and redesigned it. This one is maybe a s
 imple application, but also a very useful base! 
 
