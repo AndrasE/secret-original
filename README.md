@@ -16,7 +16,7 @@
 
 ## Hi there 👋
 
-While I was doing my self-studies on <a href="https://www.udemy.com/course/the-complete-web-development-bootcamp" target="_blank" rel="noopener noreferrer">Udemy</a> I felt intrigued to take a project further as by using EJS with MongoDb user could interact with the App (Houston we have a back-end! 🛸).  This was the first finished product of my efforts. As I wanted to add extra bits, I later recreated the repo on the name secrets and redesigned it. This one is maybe a simple application at first, but for me meant a lot. We can finally interact with the app, not solely front-end. I think this could be a useful for some want to create a simple Ejs/Mongo/Express/Node fullstack app. For me it was, but I hope you can find it useful too! 🤝
+While I was doing my self-studies on <a href="https://www.udemy.com/course/the-complete-web-development-bootcamp" target="_blank" rel="noopener noreferrer">Udemy</a>, I felt intrigued to take a project further by using EJS with MongoDb where users can interact with the App (Houston we have a back-end! 🛸).  This was the first finished product of my efforts. As I wanted to add extra bits, I later recreated the repo under the name "Secrets" and redesigned it. This one might appear as a simple application, but means a lot to me. We can finally interact with the app, not solely front-end. I think this could be a useful project if you want to create a simple Ejs/Mongo/Express/Node fullstack app. For me it was, but I hope you will find it useful too! 🤝
 
 Thank you, code safe! 💻
 
