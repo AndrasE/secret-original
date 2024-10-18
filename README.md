@@ -3,7 +3,7 @@
   <img src="https://github.com/AndrasE/raw-readme/blob/main/secrets-orig-readme-img.png?raw=true" width="150px">
   </a>
 <br/>
-EJS webapp with MongoDb database with Express (session) cookies
+EJS webapp with MongoDb database & OAuth options with Express (session) cookies
 </h3>
 
 ## Hi there 👋
