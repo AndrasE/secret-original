@@ -8,7 +8,7 @@ EJS webapp with MongoDb database & OAuth options with Express (session) cookies
 
 ## Hi there 👋
 
-During my self-studies on **[Udemy](https://www.udemy.com/course/the-complete-web-development-bootcamp)**, we developed a project that integrates EJS with MongoDB, allowing users to interact with the app.
+During my self-studies on **[Udemy](https://www.udemy.com/course/the-complete-web-development-bootcamp)**, we developed a project that integrates **[EJS](https://ejs.co/)** with **[MongoDB](https://www.mongodb.com/)**, allowing users to interact with the app.
 
 Later, I revamped the project under the name 
 **[Secrets](https://github.com/AndrasE/secrets)** and gave it a fresh new interface, authentication and swipe functionality. While it may seem like a simple application, it holds special significance for me as it marked my first real step into full-stack development. The project demonstrates how to build a basic EJS/MongoDB/Express/Node app, and I hope you find it as useful as I did!
