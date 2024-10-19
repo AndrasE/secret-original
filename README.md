@@ -15,6 +15,10 @@ Later, I revamped the project under the name
 
 The app is deployed on Heroku's eco-tier, so please allow 2-3 seconds for it to load - thank you for your patience!
 
+<div align="center">
+<img src="https://github.com/AndrasE/raw-readme/blob/9c4de24486543db9f7378b223611919b183e59a7/thumbs/secrets_orig.png" width="420">
+</div>
+
 ## Run 🚀
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
