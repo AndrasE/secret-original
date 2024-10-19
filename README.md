@@ -1,6 +1,6 @@
 <h3 align="center">
   <a href="https://app-secret-original.herokuapp.com/" target="_blank" rel="noopener noreferrer">
-  <img src="https://github.com/AndrasE/raw-readme/blob/main/secrets-orig-readme-img.png?raw=true" width="150px">
+  <img src="https://github.com/AndrasE/raw-readme/blob/e0ba0d38fc6f2bb201983bbc4986e59f1ae946f2/logo/secrets-orig-readme-img.png" width="150px">
   </a>
 <br/>
 EJS webapp with MongoDb database & OAuth options with Express (session) cookies
